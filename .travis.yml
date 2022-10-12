@@ -1,0 +1,20 @@
+# After changing this file, check it on:
+#   http://lint.travis-ci.org/
+language: python
+python:
+- "2.7.9"
+addons:
+  postgresql: "9.4"
+matrix:
+  include:
+  - python: "2.7.9"
+    addons:
+      postgresql: "9.3"
+before_script:
+- psql -c 'CREATE DATABASE tournament;' -U postgres
+before_install:
+- pip install psycopg2
+- pip install PrettyTable
+script:
+- python test.py
+- python tournament_test.py
